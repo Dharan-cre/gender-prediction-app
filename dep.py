@@ -19,7 +19,7 @@ st.write(df)
 model= load(open('gender_int.pkl', 'rb'))
 prediction=model.predict_proba(df)
 st.subheader("Prediction result")
-st.write("yes"if prediction[0][1]>0.5 else "no")
+st.write("female"if prediction[0][1]>0.5 else "male")
 st.subheader("Prediction")
 st.write(prediction)
 
