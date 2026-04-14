@@ -16,11 +16,10 @@ df= user_input()
 st.subheader("User Input Parameters")
 st.write(df)
 
-model= load(open('gender_int.pkl', 'rb'))
+model = load(open(r'c:\Users\elang\python\gender prediction\gender_int.pkl', 'rb'))
 prediction=model.predict_proba(df)
 st.subheader("Prediction result")
 st.write("female"if prediction[0][1]>0.5 else "male")
 st.subheader("Prediction")
 st.write(prediction)
-
 
