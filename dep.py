@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import os
 from pickle import load
 
 st.title("Gender Prediction App")
@@ -12,14 +13,19 @@ def user_input():
     features = pd.DataFrame(data, index=[0])
     return features
 
-df= user_input()
+df = user_input()
+
 st.subheader("User Input Parameters")
 st.write(df)
 
-model = load(open(r'c:\Users\elang\python\gender prediction\gender_int.pkl', 'rb'))
-prediction=model.predict_proba(df)
-st.subheader("Prediction result")
-st.write("female"if prediction[0][1]>0.5 else "male")
-st.subheader("Prediction")
-st.write(prediction)
+# ✅ FIXED MODEL PATH (important)
+model_path = os.path.join(os.path.dirname(__file__), "gender_int.pkl")
+model = load(open(model_path, 'rb'))
 
+prediction = model.predict_proba(df)
+
+st.subheader("Prediction result")
+st.write("female" if prediction[0][1] > 0.5 else "male")
+
+st.subheader("Prediction probability")
+st.write(prediction)
